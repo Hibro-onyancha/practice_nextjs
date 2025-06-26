@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wishes</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" id="mainInput" placeholder="What do you wish for?" />
+    <button id="add_btn" style="border-radius: 20%; height: 50px; width: 100px; background-color: blue;"></button>
+    <ul id="list_of_wishes"></ul>
+  </div>
+
+  <script>
+    const app = document.getElementById("app");
+    const mainInput = document.getElementById("mainInput");
+    const listOfWishes = document.getElementById("list_of_wishes");
+    const addBtn = document.getElementById("add_btn");
+
+    // Add button text
+    const addBtnText = document.createTextNode("Add Wish");
+    addBtn.appendChild(addBtnText);
+
+    // Add a title
+    const titleH = document.createElement("h1");
+    const titleNode = document.createTextNode("A short list of wishes");
+    titleH.appendChild(titleNode);
+    app.appendChild(titleH);
+
+    addBtn.addEventListener("click", () => {
+      const wish = mainInput.value.trim();
+      if (wish === "") return;
+
+      const item = document.createElement("li");
+
+      const wishNode = document.createTextNode(wish);
+      item.appendChild(wishNode);
+
+      // Delete button
+      const delbtn = document.createElement("button");
+      delbtn.textContent = "Delete";
+      delbtn.style.backgroundColor = "red";
+      delbtn.style.color = "white";
+      delbtn.style.borderRadius = "10%";
+      delbtn.style.marginLeft = "10px";
+      delbtn.addEventListener("click", () => {
+        listOfWishes.removeChild(item);
+      });
+
+      // Update input
+      const updateInput = document.createElement("input");
+      updateInput.type = "text";
+      updateInput.placeholder = "Update wish";
+
+      // Update button
+      const updateBtn = document.createElement("button");
+      updateBtn.textContent = "Update";
+      updateBtn.style.marginLeft = "5px";
+      updateBtn.addEventListener("click", () => {
+        const updatedText = updateInput.value.trim();
+        if (updatedText !== "") {
+          item.firstChild.nodeValue = updatedText;
+          updateInput.value = ""; // optional: clear input after update
+        }
+      });
+
+      item.appendChild(delbtn);
+      item.appendChild(updateInput);
+      if(updateInput !==""){
+      item.appendChild(updateBtn);
+    }
+
+      listOfWishes.appendChild(item);
+      mainInput.value = "";
+    });
+  </script>
+</body>
+</html>

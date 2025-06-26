@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id = "app"></div>
+    <script>
+        const app =  document.getElementById("app")
+        const para1 = document.createElement("p")
+        const text1 = "this is my first time codding using next js ,so far so good ,all is well"
+        const text1Node = document.createTextNode(text1)
+        para1.appendChild(text1Node)
+        app.appendChild(para1)   
+        const title =  document.createElement("h2")
+        const titleText = "Introduction (HELLO WORLD)"
+        const titleTextNode = document.createTextNode(titleText)
+        title.appendChild(titleTextNode)     
+        app.appendChild(title)
+    </script>
+</body>
+</html>
