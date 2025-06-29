@@ -9,14 +9,18 @@
     <div id="app">
         
     <h2 id="title">Quiz for newbies</h2>
-    <p>What is your first  name as indicated in your national certificate of birth?</p>
-    <input type="text" placeholder="first name">
-    <button>submit</button>
-    <p>Loading...</p>
-    <p>lucky guess,but not quite please try again later</p>
-    <p>huray you got it ,congratulations!</p>
+    <p id="querry">What is your first  name as indicated in your national certificate of birth?</p>
+    <input type="text" placeholder="first name" id="main_input">
+    <button id="submit_btn">submit</button>
+    <p id="load_txt">Loading...</p>
+    <p id="fail_text">lucky guess,but not quite please try again later</p>
+    <p id="success_text">huray you got it ,congratulations!</p>
     </div>
     <script>
+        //html elements
+        const title = document.getElementById("title")
+        //constants states
+        const [input ,onInPutChange] = useState("")//if this input changes then it means we are 
 
     </script>
 </body>
