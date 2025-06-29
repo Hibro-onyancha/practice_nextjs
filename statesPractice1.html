@@ -1,40 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz App</title>
 </head>
 <body>
-    <div id="app">
-        <div id="sub_form">
-            <h2 id="title">Quiz for newbies</h2>
-            <p id="querry">What is your first  name as indicated in your national certificate of birth?</p>
-            <input type="text" placeholder="first name" id="main_input">
-            <button id="submit_btn">submit</button>
-            <p id="load_txt">Loading...</p>
-            <p id="fail_txt">lucky guess,but not quite please try again later</p>
-        </div>
-    <p id="success_text">huray you got it ,congratulations!</p>
+  <div id="app">
+    <div id="sub_form">
+      <h2 id="title">Quiz for newbies</h2>
+      <p id="querry">What is your first name as indicated in your national certificate of birth?</p>
+      <input type="text" placeholder="first name" id="main_input" />
+      <button id="submit_btn" style="background-color: blue;">submit</button>
+      <p id="load_txt" style="display: none;">Loading...</p>
+      <p id="fail_txt" style="display: none;">Lucky guess, but not quite. Please try again later.</p>
     </div>
-    <script>
-        //html elements
-        const app = document.getElementById("app")
-        const title = document.getElementById("title")
-        const subForm = document.getElementById("sub_form")
-        const submitBtn = document.getElementById("submit_btn")
-        const loadText= document.getElementById("load_txt")
-        const failText= document.getElementById("fail_txt")
-        const succesText= document.getElementById("success_text")
+    <p id="success_text" style="display: none;">Huray, you got it! Congratulations!</p>
+  </div>
 
+  <script>
+    // Get DOM elements
+    const app = document.getElementById("app");
+    const subForm = document.getElementById("sub_form");
+    const mainInput = document.getElementById("main_input");
+    const submitBtn = document.getElementById("submit_btn");
+    const loadText = document.getElementById("load_txt");
+    const failText = document.getElementById("fail_txt");
+    const successText = document.getElementById("success_text");
 
-        //constants states
-        const [input ,onInPutChange] = useState("")//if this input changes then it means the submit button is supposed to be active
-        const [state,onChangeState] = useState(0)//0==neutral 1==loading 2==sucess 3== fail
-        if(state === 2){
-            app.removeChild(subForm)
-        }
-        
-    </script>
+    let input = "";
+    let state = 0; // 0 = neutral, 1 = loading, 2 = success, 3 = fail
+
+    // Event: when user types
+    mainInput.addEventListener("input", (e) => {
+      input = e.target.value.trim();
+    });
+
+    // Event: when user clicks submit
+    submitBtn.addEventListener("click", () => {
+      handleAnsSubmit(input);
+    });
+
+    async function handleAnsSubmit(answer) {
+      state = 1;
+      show(loadText);
+      hide(failText);
+      hide(successText);
+      submitBtn.disabled = true;
+
+      await sleep(2000);
+
+      if (answer.toLowerCase() === "hibro") {
+        state = 2;
+        hide(subForm);
+        show(successText);
+      } else {
+        state = 3;
+        show(failText);
+        failText.style.color = "red";
+        submitBtn.style.backgroundColor = "grey";
+      }
+
+      hide(loadText);
+      submitBtn.disabled = false;
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function hide(el) {
+      el.style.display = "none";
+    }
+
+    function show(el) {
+      el.style.display = "";
+    }
+  </script>
 </body>
 </html>
