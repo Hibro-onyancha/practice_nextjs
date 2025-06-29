@@ -7,21 +7,34 @@
 </head>
 <body>
     <div id="app">
-        
-    <h2 id="title">Quiz for newbies</h2>
-    <p id="querry">What is your first  name as indicated in your national certificate of birth?</p>
-    <input type="text" placeholder="first name" id="main_input">
-    <button id="submit_btn">submit</button>
-    <p id="load_txt">Loading...</p>
-    <p id="fail_text">lucky guess,but not quite please try again later</p>
+        <div id="sub_form">
+            <h2 id="title">Quiz for newbies</h2>
+            <p id="querry">What is your first  name as indicated in your national certificate of birth?</p>
+            <input type="text" placeholder="first name" id="main_input">
+            <button id="submit_btn">submit</button>
+            <p id="load_txt">Loading...</p>
+            <p id="fail_txt">lucky guess,but not quite please try again later</p>
+        </div>
     <p id="success_text">huray you got it ,congratulations!</p>
     </div>
     <script>
         //html elements
+        const app = document.getElementById("app")
         const title = document.getElementById("title")
-        //constants states
-        const [input ,onInPutChange] = useState("")//if this input changes then it means we are 
+        const subForm = document.getElementById("sub_form")
+        const submitBtn = document.getElementById("submit_btn")
+        const loadText= document.getElementById("load_txt")
+        const failText= document.getElementById("fail_txt")
+        const succesText= document.getElementById("success_text")
 
+
+        //constants states
+        const [input ,onInPutChange] = useState("")//if this input changes then it means the submit button is supposed to be active
+        const [state,onChangeState] = useState(0)//0==neutral 1==loading 2==sucess 3== fail
+        if(state === 2){
+            app.removeChild(subForm)
+        }
+        
     </script>
 </body>
 </html>
